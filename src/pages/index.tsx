@@ -52,7 +52,7 @@ export default function Home() {
       return todo;
     });
     setTodos(updatedTodos);
-  }, [setTodos]);
+  }, [todos]);  // Bug #7 Add the todos and not the setTodos function as dependency, otherwise app wo't see new toDo items
 
   const displayTodoList = (todoList:Todo[]) => {
     return (
