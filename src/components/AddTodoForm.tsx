@@ -13,6 +13,7 @@ function AddTodoForm({ addTodo }: AddTodoFormProps) {
     const [desc, setDesc] = useState<string>('');
 
     const handleSubmit = (event: React.FormEvent) => {
+        event.preventDefault(); // #4 Block the default form submit by html 
         addTodo(title, desc);
         setTitle('');
         setDesc('');
@@ -23,6 +24,7 @@ function AddTodoForm({ addTodo }: AddTodoFormProps) {
             <div>
                 <label>Title:</label>
                 <input
+                    value={title}  // # 5 The title field has to be associated with the title state. Otherwise the value does not clear when you add a ToDo
                     type="text"
                     placeholder="Provide a title for the new To Do"
                     onChange={(e) => setTitle(e.target.value)}

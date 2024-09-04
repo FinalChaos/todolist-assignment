@@ -32,12 +32,16 @@ export default function Home() {
       isUrgent: false,
     };
 
-    todos.push(newTodo);
-    setTodos(todos);
+    // Bug #6. You need to create a new array to pass to the component's state.
+    // React compares object references and if you mutate the array the original refernce
+    // stays the same and React does not 'know' the value changed so no re-render and the
+    // screen stays the same
+    setTodos(todos.concat([newTodo])); 
   };
 
   const deleteTodo = (id: number) => {
-    setTodos(todos.filter((todo) => todo.id === id));
+    // Bug #3 delete should remove the item deleted and leave evertything else.
+    setTodos(todos.filter((todo) => todo.id !== id)); 
   };
 
   const toggleProperty = useCallback((id: number, property: keyof Pick<Todo, 'isCompleted' | 'isUrgent'>) => {
@@ -63,11 +67,7 @@ export default function Home() {
 
   const displayTodos = (displayUrgent: boolean) => {
     return displayTodoList(todos.filter((x) => {
-      if (displayUrgent) {
-        return !x.isCompleted && x.isUrgent === displayUrgent;
-      } else {
-        return !x.isCompleted && x.isUrgent !== displayUrgent;
-      }
+        return !x.isCompleted && (x.isUrgent === displayUrgent);
     }));
   };
 

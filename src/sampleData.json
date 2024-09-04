@@ -54,5 +54,12 @@
         "description": "Revamp landing page with modern and responsive design",
         "isCompleted": false,
         "isUrgent": false
+    },
+	   {
+        "id": 9,
+        "title": "TomTest",
+        "description": "Add isCompleted true, isUrgent: false so all combos can be verified",
+        "isCompleted": true,
+        "isUrgent": false
     }
 ]
